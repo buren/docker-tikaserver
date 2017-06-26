@@ -18,4 +18,9 @@ RUN	apt-get update \
 	&& apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 9998
-CMD java -jar /tika-server-${TIKA_VERSION}.jar --host=0.0.0.0 --port=$PORT
+
+# See https://wiki.apache.org/tika/TikaJAXRS#Specifying_a_URL_Instead_of_Putting_Bytes
+# for more details on the flags:
+# 		-enableUnsecureFeatures
+#  	  -enableFileUrl
+CMD java -jar /tika-server-${TIKA_VERSION}.jar --host=0.0.0.0 --port=$PORT -enableUnsecureFeatures -enableFileUrl
