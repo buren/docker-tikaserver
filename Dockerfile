@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-MAINTAINER david@logicalspark.com
+MAINTAINER burenstam@gmail.com
 
 ENV TIKA_VERSION 1.15
 ENV TIKA_SERVER_URL https://www.apache.org/dist/tika/tika-server-$TIKA_VERSION.jar
@@ -18,4 +18,4 @@ RUN	apt-get update \
 	&& apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 9998
-ENTRYPOINT java -jar /tika-server-${TIKA_VERSION}.jar -h 0.0.0.0
+CMD java -jar /tika-server-${TIKA_VERSION}.jar --host=0.0.0.0 --port=$PORT
